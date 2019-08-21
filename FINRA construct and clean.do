@@ -9,7 +9,7 @@ use "C:\Users\lwh_v\Box Sync\LER\Projects\FINRA Data Collection\Stata FINRA 2008
 
 ***Generate variables***
 
-**MotionSummaryJudgement**
+**MotionSummaryJudgment**
 
 *remove line breaks in complete text*
 gen ct=subinstr(CompleteText,char(10)," ",.)
@@ -74,6 +74,8 @@ gen cccompenamtnum=cccompenamtinteger+cccompenamtdecimal
 
 *******************************************************************
 
+
+
 generate ccincomeflag = 1 if strpos(lower(rrt), "income") != 0
 
 generate ccwageflag = 1 if strpos(lower(rrt), "wage") != 0
@@ -86,14 +88,28 @@ generate ccprofitflag = 1 if strpos(lower(rrt), "profit") != 0
 
 **************************************************************************************************************************************
 
-gen cclaimcombined=cccompenamtnum+ccincome+ccwageflag+ccprofitflag
+gen cclaimcombined=cccompenamtnum+ccincome+ccwageflag+ccprofit
 
 **deal with unspecified**
 
+
+
+
+
+***************************************************************************************************************************************
 **CAwardedComp ($) (compensatory, income/wage, combined)
-gen cawardcompdam=.
-gen cawardincomeloss=.
-gen cawardcombined=.
+
+gen at=subinstr(AwardText,char(10)," ",.)
+
+generate cacompensatflag = (strpos(lower(at), "compensat") != 0 ) //1394 cases: ccompensatflag ==1
+
+generate caincomeflag = 1 if strpos(lower(at), "income") != 0
+
+generate cawageflag = 1 if strpos(lower(at), "wage") != 0
+
+generate cacomissionflag = 1 if strpos(lower(at), "commission") != 0
+
+generate caprofitflag = 1 if strpos(lower(at), "profit") != 0
 
 
 
