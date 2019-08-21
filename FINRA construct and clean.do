@@ -120,6 +120,10 @@ generate caprofitflag = 1 if strpos(lower(at), "profit") != 0
 *list data
 display compenphrase[8]
 display ReliefRequestedText[1]
-display rrt[12]
+display rrt[1]
 list AwardID cccompenamtpart1 if cccompenamtpart1!=""
 list AwardID cccompenamt cccompenamtpart2part1 cccompenamtpart2part2 if cccompenamtpart2part1<=10
+
+********************************************************************************************************************************************
+
+
